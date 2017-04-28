@@ -1,0 +1,91 @@
+{% extends "final/base.html" %}
+
+{% block content %}
+
+<h1>Topic Modeling</h1>
+
+<p>
+    The topic modeling section will contain all the information gathered from the political fact checking subreddit. This model will create a number of topics from the text data gathered from each post. This text data includes the post title, self text (post body), comments, and text from linked articles. The text data is scraped, cleaned, normalized and given as input to the LDA model. The results give us a number of topics as a set. Each topic in the set includes words most frequently found together, in which we can generalize into a larger topic. This section will include two different types of analysis of topics. First, we will analyze general topics found from the data as a whole. This includes all posts within the subreddit. Second, we will use topic modeling for a given flair type (True, False, Mostly True...etc.)
+</p>
+
+<div id="navbar" class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list" style="background: #dd5555;">
+        <li class="pure-menu-item" style="cursor: pointer"><a id="topic_links" class="pure-menu-link" onclick="change('g_all')" >All</a></li>
+        <li class="pure-menu-item" style="cursor: pointer"><a id="topic_links" class="pure-menu-link" onclick="change('g_bias')" >Bias</a></li>
+        <li class="pure-menu-item" style="cursor: pointer"><a id="topic_links" class="pure-menu-link" onclick="change('g_confirmed')">Confirmed</a></li>
+        <li class="pure-menu-item" style="cursor: pointer"><a id="topic_links" class="pure-menu-link" onclick="change('g_false')">False</a></li>
+        <li class="pure-menu-item" style="cursor: pointer"><a id="topic_links" class="pure-menu-link" onclick="change('g_mostlyFalse')">Mostly False</a></li>
+        <li class="pure-menu-item" style="cursor: pointer"><a id="topic_links" class="pure-menu-link" onclick="change('g_mostlyTrue')">Mostly True</a></li>
+        <li class="pure-menu-item" style="cursor: pointer"><a id="topic_links" class="pure-menu-link" onclick="change('g_none')">None</a></li>
+        <li class="pure-menu-item" style="cursor: pointer"><a id="topic_links" class="pure-menu-link" onclick="change('g_verify')">Verify</a></li>
+    </ul>
+</div>
+
+<div id=g_all style="padding-top: 10px; display: block; width:100%;">
+    <p> all </p>
+  <iframe id="frame" src="{% url 'g_all' %}"></iframe>
+</div>
+<div id=g_bias style="padding-top: 10px; display: none">
+    <p> bias </p>
+  <iframe id="frame" src="{% url 'g_bias' %}"></iframe>
+</div>
+<div id=g_confirmed style="padding-top: 10px; display: none">
+    <p> confirmed </p>
+  <iframe id="frame" src="{% url 'g_confirmed' %}"></iframe>
+</div>
+<div id=g_false style="padding-top: 10px; display: none">
+    <p> false </p>
+  <iframe id="frame" src="{% url 'g_false' %}"></iframe>
+</div>
+<div id=g_mostlyFalse style="padding-top: 10px; display: none">
+    <p> mostlyF </p>
+  <iframe id="frame" src="{% url 'g_mostlyFalse' %}"></iframe>
+</div>
+<div id=g_mostlyTrue style="padding-top: 10px; display: none">
+    <p> mTrue </p>
+  <iframe id="frame" src="{% url 'g_mostlyTrue' %}"></iframe>
+</div>
+<div id=g_none style="padding-top: 10px; display: none">
+    <p> none </p>
+  <iframe id="frame" src="{% url 'g_none' %}"></iframe>
+</div>
+<div id=g_verify style="padding-top: 10px; display: none">
+  <p> Verify </p>
+  <iframe id="frame" src="{% url 'g_verify' %}"></iframe>
+</div>
+
+
+<script>
+function change(page) {
+  var all = document.getElementById('g_all');
+  var bias = document.getElementById('g_bias');
+  var confirmed = document.getElementById('g_confirmed');
+  var False = document.getElementById('g_false');
+  var mTrue = document.getElementById('g_mostlyTrue');
+  var mFalse = document.getElementById('g_mostlyFalse');
+  var none = document.getElementById('g_none');
+  var verify = document.getElementById('g_verify');
+  var elems = [all, bias, confirmed, False, mTrue, mFalse, none, verify]
+
+  for(item in elems){
+    if (elems[item].id == page){
+      console.debug(elems[item].id)
+      elems[item].style.display = 'block';
+    }else{
+      if (elems[item].style.display == 'block'){
+        elems[item].style.display = 'none'
+      }
+    }
+
+
+    }
+
+
+}
+
+
+</script>
+
+
+
+{% endblock %}

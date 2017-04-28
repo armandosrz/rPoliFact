@@ -1,0 +1,60 @@
+{% load staticfiles %}
+
+
+
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'final/style.css' %}" />
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<head>
+  <title>
+      poliFact Analysis
+  </title>
+
+  <meta charset="UTF-8">
+
+      <script>
+      // Imperfect framebusting
+      if(top.location != self.location){
+              parent.location = self.location;
+      }
+      </script>
+
+</head>
+<body>
+
+<div class="container">
+
+  <div id="header">
+      <div id="titles">
+          <h1>r/poliFact Analysis</h1>
+          <h3>Understanding fact checking as a crowd source activity</h3>
+      </div>
+      <div id="navbar" class="pure-menu pure-menu-horizontal">
+          <ul class="pure-menu-list">
+              <li class="pure-menu-item"><a class="pure-menu-link" href="{% url 'index' %}">Intro</a></li>
+              <li class="pure-menu-item"><a class="pure-menu-link" href="{% url 'data' %}">Data Analysis</a></li>
+              <li class="pure-menu-item"><a class="pure-menu-link" href="{% url 'topic' %}" title="Close your account">Topic Modeling</a></li>
+              <li class="pure-menu-item"><a class="pure-menu-link" href="{% url 'model' %}">Model Prediction</a></li>
+          </ul>
+      </div>
+  </div>
+
+<div id="main" class="centerpiece">
+
+  <!-- page-specific content goes here -->
+  {% block content %}{% endblock %}
+  <!-- end page-specific content -->
+</div>
+
+</div>
+
+<div class="footer">
+Copyright The University of Mississippi 2017
+</div>
+
+</body>
+</html>
